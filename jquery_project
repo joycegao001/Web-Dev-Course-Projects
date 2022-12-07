@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <style>
+        body{
+            background-image: url("starwarsbg.jpg"); //this is the link to the image stored on my own device; credits to Andy Holmes on unsplash for the image!
+        }
+        button{
+            padding: 12px;
+            color: rgb(47, 193, 191);
+            border: 2px solid white;
+            cursor: pointer;
+            text-align: center;
+            font-size: 1.5rem;
+        }
+        button:hover{
+            background-color: rgba(47, 193, 191);
+            color: white;
+        }
+        .name{
+            font-size: 48px;
+            color: rgba(47, 193, 191);
+            display: flex;
+            justify-content: center;
+            text-decoration: underline;
+        }
+        .char_img{
+            height: 500px;
+            width: 400px;
+            display: flex;
+            justify-content: center;
+            margin: auto;
+            border: 5px solid white;
+        }
+        button{
+            display: block;
+            margin: auto;
+        }
+    </style>
+
+    <br>
+    <button>Character Generator</button>
+    <h1 class="name"></h1>
+    <img src="" class="char_img" >
+    
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.1/dist/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("button").on("click",function(){
+                var num = Math.ceil(Math.random()*88);
+                $.get(`https://akabab.github.io/starwars-api/api/id/${num}.json`,                
+                    function(data){
+                    console.log(data)
+                    $("h1.name").text(data['name'])
+                    $(".char_img").attr("src",data['image'])
+                })
+
+            })
+
+        })
+    </script>
+</body>
+</html>
